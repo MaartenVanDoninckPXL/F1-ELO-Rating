@@ -109,7 +109,7 @@ def compute_elo_ratings(races):
 
 
 if __name__ == "__main__":
-    races = fetch_races(2025, 2025)
+    races = fetch_races(2020, 2025)
     print(f"Fetched {len(races)} total races")
 
     if races:
@@ -118,10 +118,5 @@ if __name__ == "__main__":
         print("\nTop 10 Elo Standings:")
         for rank, entry in enumerate(standings[:10], start=1):
             print(f"{rank}. {entry['driver']}: {entry['elo']}")
-
-        sample_driver = standings[0]['driver']
-        print(f"\nElo History for {sample_driver}:")
-        for record in history[sample_driver][-5:]:
-            print(f"{record['race']}: {record['elo']}")
     else:
-        print("No races found for the specified year.")
+        print("No races found for the specified year(s)")

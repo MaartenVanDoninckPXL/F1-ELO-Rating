@@ -1,7 +1,11 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from backend.logic.elo_calculator import fetch_races, compute_elo_ratings
 
 app = FastAPI()
+
+races_data = fetch_races(2020, 2025)
+elo_standings, elo_history_map = compute_elo_ratings(races_data)
 
 app.add_middleware(
     CORSMiddleware,
@@ -9,9 +13,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
-elo_standings = []
-elo_history_map = {}
 
 
 @app.get("/elo_standings")
